@@ -63,6 +63,7 @@ int main(int argc, char **argv) {
 
       case 'v':
         printf("Alluvial FUSE version 0.1 | current name: %s\n", argv[0]);
+        exit(0);
         break;
 
       case 'm':
@@ -115,12 +116,10 @@ int main(int argc, char **argv) {
       ::fuse_destroy(fuse);
       throw runtime_error("fuse_session_mount 失败");
     }
-    std::printf("[oofs] 已挂载 %s\n", mount_path);
+    std::printf("[fuse] 已挂载 %s\n", mount_path);
     return se;
   };
   /** local definitions ---------------------------------- FOLD END */
-
-  cout << "current name :" << id.filename() << endl;
   try {
     Overlay overlay;
     auto [cfg, fuse_o_opts] = get_options();
@@ -137,7 +136,7 @@ int main(int argc, char **argv) {
     ::fuse_remove_signal_handlers(se);
     ::fuse_destroy(fuse);
 
-    std::printf("[oofs] 已退出 (rc=%d)\n", rc);
+    std::printf("[fuse] 已退出 (rc=%d)\n", rc);
   } catch (invalid_argument &e) {
     cout << "Error: " << e.what() << endl;
     return 1;

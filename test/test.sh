@@ -9,7 +9,7 @@
 # Usage: ./test/test.sh [mount|overlay|perf ...]（默认全部，按注册表顺序执行）
 # 环境变量（透传给子脚本）：
 #   PERF_N     性能测试文件数（默认 100）
-#   OOFS_BIN   被测二进制路径（默认 build/bin/a.out）
+#   OOFS_BIN   被测二进制路径（默认 build/bin/alluvial_fuse）
 set -u
 
 SCRIPT_DIR=$(dirname "$(readlink -f "$0")")
@@ -31,7 +31,7 @@ SUITE=(
 usage() {
   echo "Usage: $0 [mount|overlay|perf ...]（默认全部按序执行）"
   echo "  PERF_N=100               性能测试文件数"
-  echo "  OOFS_BIN=/path/to/oofs   被测二进制"
+  echo "  OOFS_BIN=/path/to/fuse   被测二进制"
 }
 
 ## 按参数过滤要执行的用例；无参数 = 全部 ---------------------
@@ -53,7 +53,7 @@ TOTAL=0
 FAILED=0
 declare -a VERDICT=()
 
-echo "${C_C}======== oofs 测试套件 ========${C_N}"
+echo "${C_C}======== fuse 测试套件 ========${C_N}"
 for item in "${RUN[@]}"; do
   script=${item%%:*}
   desc=${item#*:}

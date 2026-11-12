@@ -1,4 +1,4 @@
-// util.cpp — oofs 基础工具实现
+// util.cpp — fuse 基础工具实现
 #include "util.hpp"
 
 #include "overlay.hpp"  // 磁盘格式常量（kOpaqueMarker 等）
@@ -276,4 +276,4 @@ std::string basenameOf(const std::string& path) {
   return pos == std::string::npos ? path : path.substr(pos + 1);
 }
 
-}  // namespace oofs
+}  // namespace fuse

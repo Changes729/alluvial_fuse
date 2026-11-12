@@ -2,14 +2,14 @@
 # test/lib.sh — 各测试脚本共享的公共辅助（被 test_*.sh source，不直接执行）
 #
 # 提供：颜色输出 / PASS-FAIL 计数 / 临时目录与清理 / 挂载辅助 / preflight / summary
-# 环境变量：OOFS_BIN  被测二进制路径（默认 build/bin/a.out）
+# 环境变量：OOFS_BIN  被测二进制路径（默认 build/bin/alluvial_fuse）
 set -u
 
 ## 路径（以 source 本库的脚本为准）---------------------------
 _caller=${BASH_SOURCE[1]:-$0}
 SCRIPT_DIR=$(dirname "$(readlink -f "$_caller")")
 MAIN_DIR=$SCRIPT_DIR/..
-BIN=${OOFS_BIN:-$MAIN_DIR/${BUILD_DIR:-build}/bin/${OOFS_NAME:-a.out}}
+BIN=${OOFS_BIN:-$MAIN_DIR/${BUILD_DIR:-build}/bin/${OOFS_NAME:-alluvial_fuse}}
 MOUNT_TIMEOUT_S=10
 STOP_TIMEOUT_S=5
 

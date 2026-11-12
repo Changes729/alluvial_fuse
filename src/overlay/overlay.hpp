@@ -1,4 +1,4 @@
-// overlay.hpp — oofs 覆盖层模型：lower/upper 双层解析、白名单、opaque、copy-up
+// overlay.hpp — fuse 覆盖层模型：lower/upper 双层解析、白名单、opaque、copy-up
 //
 // 兼容 containers/fuse-overlayfs 的磁盘格式约定（与 pi-agent/ogit
 // 的识别逻辑一致）：

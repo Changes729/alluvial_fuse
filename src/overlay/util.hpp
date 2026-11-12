@@ -1,4 +1,4 @@
-// util.hpp — oofs 基础工具：路径、lstat、xattr、目录枚举
+// util.hpp — fuse 基础工具：路径、lstat、xattr、目录枚举
 #pragma once
 
 #include <optional>
@@ -50,4 +50,4 @@ std::string trim(const std::string& s);
 std::vector<std::string> split(const std::string& s, char sep);
 std::string basenameOf(const std::string& path);
 
-}  // namespace oofs
+}  // namespace fuse

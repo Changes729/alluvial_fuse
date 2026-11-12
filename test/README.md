@@ -40,5 +40,5 @@
 ./test/test.sh default          # 只跑测试 4
 ./test/test_perf.sh             # 单个测试点也可独立运行
 PERF_N=1000 ./test/test.sh perf # 性能测试文件数
-OOFS_BIN=/path/to/oofs ./test/test.sh
+OOFS_BIN=/path/to/fuse ./test/test.sh
 ```

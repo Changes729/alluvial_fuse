@@ -87,7 +87,7 @@
     {
       "label": "[build] something only",
       "type": "shell",
-      "command": "./script/build.sh --target a.out"
+      "command": "./script/build.sh --target alluvial_fuse"
     }
   ]
 }

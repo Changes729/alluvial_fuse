@@ -38,4 +38,4 @@ std::vector<std::string> listXattrsAt(int dirfd, const std::string& rel);
 // O_PATH 打开（失败 -1）
 int openPathAt(int dirfd, const std::string& rel);
 
-}  // namespace oofs
+}  // namespace fuse

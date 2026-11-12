@@ -1,22 +1,5 @@
 cmake_minimum_required(VERSION 4.0.0)
-project(oofs VERSION 0.1.0)
-
-## set CPACK_PROJECT_NAME
-if(DEFINED ENV{CMAKE_PROJECT_NAME})
-  message("Use environment project name: " $ENV{CMAKE_PROJECT_NAME})
-  set(CPACK_PROJECT_NAME $ENV{CMAKE_PROJECT_NAME})
-else()
-  set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-  set(ENV{CMAKE_PROJECT_NAME} ${CPACK_PROJECT_NAME})
-endif()
-
-## set CPACK_PROJECT_VERSION
-if(DEFINED ENV{CMAKE_PROJECT_VERSION})
-  set(CPACK_PROJECT_VERSION $ENV{CMAKE_PROJECT_VERSION})
-else()
-  set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-  set(ENV{CMAKE_PROJECT_VERSION} ${CPACK_PROJECT_VERSION})
-endif()
+project(alluvial_fuse VERSION 0.1.0)
 
 ## Compiler flags
 include(CheckCXXCompilerFlag)
@@ -42,9 +25,18 @@ find_package(PkgConfig REQUIRED)
 
 add_subdirectory(src)
 
+## Install: default to user-local prefix (~/.local), binary lands in ~/.local/bin
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+  set(CMAKE_INSTALL_PREFIX "$ENV{HOME}/.local" CACHE PATH "install prefix" FORCE)
+endif()
+
+install(TARGETS ${PROJECT_NAME}
+  RUNTIME DESTINATION bin
+)
+
 ## CPack packaging configuration
-set(CPACK_PACKAGE_NAME "${CPACK_PROJECT_NAME}")
-set(CPACK_PACKAGE_VERSION "${CPACK_PROJECT_VERSION}")
+set(CPACK_PACKAGE_NAME "${PROJECT_NAME}")
+set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
 set(CPACK_PACKAGE_VENDOR "alluvial_fuse")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "alluvial_fuse - userspace overlay filesystem with TCP control plane")
 set(CPACK_GENERATOR "TGZ;ZIP")

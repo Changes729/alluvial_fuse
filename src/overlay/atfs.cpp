@@ -183,4 +183,4 @@ std::vector<std::string> listXattrsAt(int dirfd, const std::string& rel) {
   return out;
 }
 
-}  // namespace oofs
+}  // namespace fuse

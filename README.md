@@ -41,6 +41,21 @@ Alluvial FUSE 实现了一个**用户态 overlay file system**：将 lower 层�
 
 构建产物位于 `build/bin/alluvial_fuse`。
 
+### 安装
+
+```bash
+./script/install.sh
+```
+
+默认安装到 `~/.local/bin/alluvial_fuse`。可通过 `PREFIX` 环境变量更换安装前缀：
+
+```bash
+PREFIX=/usr/local ./script/install.sh   # 自定义前缀（需相应写权限）
+./script/install.sh uninstall           # 卸载
+# 等价于：
+# cmake --install build
+```
+
 ### 基本使用
 
 ```bash
@@ -115,6 +130,21 @@ Unlike a conventional overlay setup, **the mount point itself is the lower direc
 ```
 
 The binary is produced at `build/bin/alluvial_fuse`.
+
+### Install
+
+```bash
+./script/install.sh
+```
+
+Installs to `~/.local/bin/alluvial_fuse` by default. Override the prefix via the `PREFIX` environment variable:
+
+```bash
+PREFIX=/usr/local ./script/install.sh   # custom prefix (needs write access)
+./script/install.sh uninstall           # uninstall
+# Equivalent to:
+# cmake --install build
+```
 
 ### Basic Usage
 

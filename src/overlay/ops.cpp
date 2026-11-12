@@ -62,7 +62,7 @@ int copyUpIfNeeded(const std::string &rel, Layer l) {
   if (l == Layer::Lower) {
     std::string err;
     if (!Ops::overlay().copyUp(rel, err)) {
-      std::fprintf(stderr, "[oofs] copyUp(%s): %s\n", rel.c_str(), err.c_str());
+      std::fprintf(stderr, "[fuse] copyUp(%s): %s\n", rel.c_str(), err.c_str());
       return -EIO;
     }
   }
@@ -145,7 +145,7 @@ int impl_unlink(const std::string &rel) {
   if (Ops::overlay().lowerExists(rel)) { // 遮住 lower → 留白名单
     std::string err;
     if (!Ops::overlay().makeWhiteout(rel, err)) {
-      std::fprintf(stderr, "[oofs] whiteout(%s): %s\n", rel.c_str(),
+      std::fprintf(stderr, "[fuse] whiteout(%s): %s\n", rel.c_str(),
                    err.c_str());
       return -EIO;
     }
@@ -170,7 +170,7 @@ int impl_rmdir(const std::string &rel) {
   if (Ops::overlay().lowerExists(rel)) {
     std::string err;
     if (!Ops::overlay().makeWhiteout(rel, err)) {
-      std::fprintf(stderr, "[oofs] whiteout(%s): %s\n", rel.c_str(),
+      std::fprintf(stderr, "[fuse] whiteout(%s): %s\n", rel.c_str(),
                    err.c_str());
       return -EIO;
     }
@@ -231,7 +231,7 @@ int impl_rename(const std::string &from, const std::string &to,
   // 旧路径若在 lower 有副本 → 白名单遮住（否则合并视图里旧文件会"复活"）
   if (Ops::overlay().lowerExists(from)) {
     if (!Ops::overlay().makeWhiteout(from, err)) {
-      std::fprintf(stderr, "[oofs] whiteout(%s): %s\n", from.c_str(),
+      std::fprintf(stderr, "[fuse] whiteout(%s): %s\n", from.c_str(),
                    err.c_str());
       return -EIO;
     }
@@ -628,14 +628,14 @@ void *impl_init(struct fuse_conn_info *, struct fuse_config *cfg) {
   cfg->attr_timeout = 0;
   cfg->kernel_cache = 0;
 #if 0
-  std::printf("[oofs] init: lower=%s upper=%s mount=%s\n",
+  std::printf("[fuse] init: lower=%s upper=%s mount=%s\n",
               Ops::overlay().cfg.mount.c_str(), Ops::overlay().cfg.upper.c_str(),
               Ops::overlay().cfg.mount.c_str());
 #endif
   return nullptr;
 }
 
-void impl_destroy(void *) { std::printf("[oofs] destroy\n"); }
+void impl_destroy(void *) { std::printf("[fuse] destroy\n"); }
 
 } // namespace
 
