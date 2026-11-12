@@ -1,0 +1,12 @@
+{
+  "terminal.integrated.env.linux": {
+    "CMAKE_OVERRIDE_PROJECT_NAME": "alluvial_fuse",
+    "CMAKE_DEFAULT_BUILD_DIR": "${workspaceFolder}/build"
+  },
+  "clang-format.assumeFilename": "${workspaceFolder}/.clang-format",
+  "editor.rulers": [
+    70,
+    80,
+    100
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "[build] default",
+      "type": "shell",
+      "command": "./script/build.sh",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "options": {
+        "env": {
+          "CMAKE_PROJECT_NAME": "${config:terminal.integrated.env.linux.CMAKE_OVERRIDE_PROJECT_NAME}",
+          "CMAKE_OPTIONS": "-DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+          "BUILD_DIR": "${config:terminal.integrated.env.linux.CMAKE_DEFAULT_BUILD_DIR}"
+        }
+      }
+    },
+    {
+      "label": "[test] all",
+      "type": "shell",
+      "command": "./script/build.sh && ./test/test.sh",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "options": {
+        "env": {
+          "CMAKE_PROJECT_NAME": "${config:terminal.integrated.env.linux.CMAKE_OVERRIDE_PROJECT_NAME}",
+          "CMAKE_OPTIONS": "-DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+          "BUILD_DIR": "${config:terminal.integrated.env.linux.CMAKE_DEFAULT_BUILD_DIR}"
+        }
+      }
+    },
+    {
+      "label": "[build] deploy",
+      "type": "shell",
+      "command": "./script/build.sh deploy",
+      "options": {
+        "env": {
+          "CMAKE_PROJECT_NAME": "${config:terminal.integrated.env.linux.CMAKE_OVERRIDE_PROJECT_NAME}",
+          "CMAKE_OPTIONS": "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+          "BUILD_DIR": "${config:terminal.integrated.env.linux.CMAKE_DEFAULT_BUILD_DIR}"
+        }
+      }
+    },
+    {
+      "label": "[build - Windows] cross compile",
+      "type": "shell",
+      "command": "./script/build.sh -j8",
+      "options": {
+        "env": {
+          "CMAKE_PROJECT_NAME": "${config:terminal.integrated.env.linux.CMAKE_OVERRIDE_PROJECT_NAME}",
+          "CMAKE_OPTIONS": "-DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_TOOLCHAIN_FILE=./tools/windows/windows.toolchain.cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+          "BUILD_DIR": "build_windows"
+        }
+      }
+    },
+    {
+      "label": "[build - ARM] cross compile",
+      "type": "shell",
+      "command": "./script/build.sh -j8",
+      "options": {
+        "env": {
+          "CMAKE_PROJECT_NAME": "${config:terminal.integrated.env.linux.CMAKE_OVERRIDE_PROJECT_NAME}",
+          "CMAKE_OPTIONS": "-DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_TOOLCHAIN_FILE=./tools/arm/arm.toolchain.cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+          "BUILD_DIR": "build_arm"
+        }
+      }
+    },
+    {
+      "label": "[build - x86] cross compile",
+      "type": "shell",
+      "command": "./script/build.sh -j8",
+      "options": {
+        "env": {
+          "CMAKE_PROJECT_NAME": "${config:terminal.integrated.env.linux.CMAKE_OVERRIDE_PROJECT_NAME}",
+          "CMAKE_OPTIONS": "-DCMAKE_BUILD_TYPE=DEBUG -DCMAKE_TOOLCHAIN_FILE=./tools/linux_pc/x86.toolchain.cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON",
+          "BUILD_DIR": "build_x86"
+        }
+      }
+    },
+    {
+      "label": "[build] something only",
+      "type": "shell",
+      "command": "./script/build.sh --target a.out"
+    }
+  ]
+}
